@@ -1,0 +1,26 @@
+/* Archivo: styles.css */
+
+/* Títulos principales en color rojo */
+h1, h2 {
+    color: red;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+}
+
+/* Subtítulos o títulos secundarios en color negro */
+h3, h4 {
+    color: black;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+}
+
+/* Texto de párrafos en gris oscuro */
+p {
+    color: #333333;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+/* Estilos para la tabla de contenidos (TOC) */
+.toc {
+    color: green;
+}

@@ -1,0 +1,13 @@
+---
+title: "Projects"
+description: "Here are some works but I have others archived in my repositories."
+listing:
+  contents: posts
+  type: "default"
+  sort:
+    "publishDate desc"
+  categories: true
+  filter-ui: [category, title, date]
+---
+
+------------------------------------------------------------------------

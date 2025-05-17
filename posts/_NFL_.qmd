@@ -1,0 +1,441 @@
+---
+title: "NFL"
+subtitle: "Análisis de la Liga Nacional de Fútbol"
+author: "Brandon Martinez"
+date: "`r Sys.Date()`"
+abstract: "Un análisis profundo de la Liga Nacional de Fútbol."
+abstract-title: "Resumen"
+thanks: "Agradecimientos a todos los colaboradores."
+lang: "es"
+
+toc: true
+toc-title: "Contenidos"
+toccolor: "black"
+number-sections: true
+number-depth: 2
+toc-location: right
+toc-expand: true
+lof: true             # List of Figures (solo para PDF)
+lot: true             # List of Tables (solo para PDF)
+
+format:
+  html:
+    toc: true
+    number-sections: true
+    css: styles.css
+  pdf:
+    toc: true
+    number-sections: true
+  docx:
+    toc: true
+    number-sections: true
+    output-file: "documento.docx"
+  revealjs:
+    slide-level: 2
+    width: 1280
+    height: 720
+    transition: "fade"
+    toc: true
+    number-sections: true
+
+editor: visual
+---
+
+# Contenido del Análisis
+
+```{r}
+#| echo: true
+
+#renv::deactivate()
+```
+
+### Introducción
+
+La Liga Nacional de Fútbol Americano (NFL) está lanzando su última Big Data Bowl, invitando a los concursantes a aprovechar los datos de seguimiento de jugadores de Next Gen Stats para producir estadísticas innovadoras y accionables. Tras competiciones anteriores que examinaron varios aspectos del juego, el enfoque de este año se desplaza a una fase crítica, pero a menudo pasada por alto: las acciones en el teorritorio y caracteristicas de los juegos y compenticion. Los participantes analizarán lo que ocurre , descubriendo patrones que pueden informar predicciones sobre las jugadas posteriores.
+
+### Análisis
+
+A través de una serie de visualizaciones de datos, exploraremos la distribución de los puntajes finales de los equipos en casa y de visitantes @fig-vs , lo que nos permitirá observar cómo se distribuyen estos puntajes y detectar patrones en su rendimiento. También analizaremos cómo varían los puntajes finales a lo largo de las temporadas @fig-temporada , lo que proporcionará información sobre el rendimiento general de los equipos. Además, se ilustrará una tabla interactiva con las características clave de los primeros 10 juegos en el conjunto de datos @tbl-search , facilitando un análisis inicial y permitiendo a los usuarios filtrar información específica según sus necesidades.
+
+# Descripcion de los datos
+
+El conjunto de datos proporcionado para el Data Bowl 2025 contiene información completa sobre los juegos de la NFL, las jugadas y el rendimiento de los jugadores. Incluye una variedad de archivos que detallan los resultados de los juegos, las jugadas individuales y las estadísticas de los jugadores, lo que permite a los participantes analizar y obtener información de los ricos datos de seguimiento suministrados por el equipo de NFL Next Gen Stats.
+
+El conjunto de datos se divide en varios componentes clave, incluidos datos del juego, datos de jugadas, datos de jugadores y datos de jugadas de jugadores, cada uno de los cuales sirve como un recurso crítico para comprender la dinámica del juego y las contribuciones de los jugadores.
+
+## Files
+
+-   **`Game Data`**: Este componente contiene información esencial sobre cada juego, incluidos identificadores y resultados del juego.
+-   **`Play Data`**: Este archivo proporciona información detallada sobre jugadas individuales dentro de los juegos, incluidas descripciones de jugadas y resultados.
+-   **`Player Data`**: Esta sección incluye información vital sobre los jugadores que participan en los juegos, como sus números de identificación y atributos físicos.
+-   **`Player Play Data`**: Este conjunto de datos ofrece estadísticas específicas de los jugadores para cada jugada, lo que permite un análisis matizado del rendimiento de los jugadores.
+
+Cada archivo está estructurado para facilitar el acceso y el análisis, lo que lo convierte en un recurso invaluable para los participantes que buscan extraer información significativa de los datos de la NFL.
+
+## librerias
+
+```{r}
+#| include: true
+#| message: false
+#| warning: false
+#  librerías necesarias
+
+library(dplyr)
+library(reactable)
+library(crosstalk)
+library(htmltools)
+library(DT)
+library(caret)
+library(pROC)
+library(ggplot2)
+library(tidyr)
+library(ROSE)
+library(webshot2)
+```
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+library(readr)
+# Cargar los datos de plays
+plays <- read_csv("plays.csv")
+# Cargar los datos de games
+games <- read_csv("games.csv")
+```
+
+### Combinar datos
+
+## Justificacion
+
+En esta sección, no mostraré el código completo para cargar los datos, ya que considero que esta parte del proceso no es necesaria para el análisis en el script . En lugar de eso, me enfocaré en las bibliotecas utilizadas y en la combinación de los conjuntos de datos, así como en la creación de variables objetivo que son relevantes para el análisis.
+
+A continuación, presento un ejemplo de cómo combinar los data frames `games` y `plays`:
+
+```{r}
+#| message: false
+#| warning: false
+
+# Combinar los data frames 'games' y 'plays'
+merged_data <- merge(games, plays, by = "gameId", all = FALSE)
+
+
+```
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+# Definir la variable objetivo
+merged_data$is_successful <- ifelse(merged_data$yardsGained > 0, 1, 0)
+```
+
+## visualizacion de datos
+
+En esta etapa, realizaremos visualizaciones de datos que permitirán entender mejor las tendencias y patrones presentes en la información analizada. A continuación, se presentan algunos ejemplos de visualizaciones que se generarán a lo largo del análisis
+
+¿Cuál es la distribución de puntajes finales de los equipos en casa y de visitantes?
+
+```{r}
+#| include: true
+#| echo: false
+#| error: false
+#| label: fig-vs
+#| fig-width: 5
+
+
+library(ggplot2)
+
+# Suponiendo que `games` es tu dataframe
+ggplot(games, aes(x = homeFinalScore)) +
+  geom_density(fill = "blue", alpha = 0.5) +
+  geom_density(aes(x = visitorFinalScore), fill = "red", alpha = 0.5) +
+  labs(title = "Distribución de Puntajes Finales: Equipos en Casa vs Visitantes",
+       x = "Puntaje Final", y = "Densidad") +
+  theme_minimal()
+
+```
+
+¿Cómo varían los puntajes finales por temporada?
+
+```{r}
+#| include: true
+#| echo: false
+#| label: fig-temporada
+#| fig-width: 5
+#| error: false
+
+ggplot(games, aes(x = factor(season), y = homeFinalScore)) +
+  geom_boxplot(fill = "blue", alpha = 0.5) +
+  geom_boxplot(aes(y = visitorFinalScore), fill = "red", alpha = 0.5) +
+  labs(title = "Variación de Puntajes Finales por Temporada",
+       x = "Temporada", y = "Puntaje Final") +
+  theme_minimal()
+
+```
+
+¿Cuál es la relación entre el puntaje del equipo en casa y el del equipo visitante?
+
+```{r}
+#| message: false
+#| warning: false
+#| include: true
+#| echo: false
+#| label: fig-relacion
+#| fig-width: 5
+#| error: false
+
+ggplot(games, aes(x = homeFinalScore, y = visitorFinalScore)) +
+  geom_point(alpha = 0.6) +
+  geom_smooth(method = "lm", color = "red") +
+  labs(title = "Relación entre Puntajes: Equipos en Casa vs Visitantes",
+       x = "Puntaje Final del Equipo en Casa", 
+       y = "Puntaje Final del Equipo Visitante") +
+  theme_minimal()
+
+```
+
+```{r}
+#| echo: false
+#| error: false
+# Identificar columnas relevantes ### Limpiar y seleccionar datos relevantes
+relevant_columns <- c("yardsToGo", "offenseFormation", "preSnapHomeTeamWinProbability", "is_successful")
+cleaned_data <- merged_data[, relevant_columns]
+#cleaned_data <- na.omit(cleaned_data)  # Eliminar filas con NA
+```
+
+¿Cuál es la tasa de éxito promedio asociada a cada formación ofensiva?
+
+```{r}
+#| include: true
+#| echo: false
+#| label: fig-exito
+#| fig-width: 5
+#| error: false
+library(dplyr)
+library(ggplot2)
+
+# Calcular la tasa de éxito por formación ofensiva
+formation_counts <- cleaned_data %>%
+  group_by(offenseFormation) %>%
+  summarise(success_rate = mean(is_successful, na.rm = TRUE))
+
+# Crear gráfico de barras
+ggplot(formation_counts, aes(x = reorder(offenseFormation, success_rate), y = success_rate)) +
+  geom_bar(stat = "identity", fill = "steelblue") +
+  coord_flip() +
+  labs(title = "Tasa de Éxito por Formación Ofensiva",
+       x = "Formación Ofensiva", 
+       y = "Tasa de Éxito") +
+  theme_minimal()
+
+```
+
+¿Cómo varía la probabilidad de ganar antes del snap en función del éxito de la jugada?
+
+```{r}
+#| include: true
+#| echo: false
+#| label: fig-snap
+#| fig-width: 5
+
+# Crear gráfico de densidad
+ggplot(cleaned_data, aes(x = preSnapHomeTeamWinProbability, fill = factor(is_successful))) +
+  geom_density(alpha = 0.5) +
+  labs(title = "Distribución de Probabilidad de Ganar Antes del Snap",
+       x = "Probabilidad de Ganar", 
+       fill = "Éxito") +
+  theme_minimal()
+
+```
+
+¿Cuáles son las características clave de los primeros 10 juegos en el conjunto de datos de la NFL, y cómo se distribuyen los puntajes finales de los equipos locales y visitantes?
+
+```{r}
+#| include: true
+#| echo: false
+#| label: tbl-search
+
+
+# Selecciona las primeras 10 filas, y podrías modificar para otras si lo deseas
+games2 <- games[c(1:10), ]
+
+# Muestra la tabla con filtro y opciones de visualización
+datatable(games2[, c('gameId', 'season', 'week', 'gameDate', 'gameTimeEastern', 
+                     'homeTeamAbbr', 'visitorTeamAbbr', 'homeFinalScore', 'visitorFinalScore')], 
+          filter = 'top', 
+          options = list(
+            pageLength = 5, 
+            autoWidth = TRUE
+          ))
+```
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+#| error: false
+# Dividir los datos en conjuntos de entrenamiento y prueba
+set.seed(123)
+train_index <- createDataPartition(cleaned_data$is_successful, p = 0.7, list = FALSE)
+train_data <- cleaned_data[train_index, ]
+test_data <- cleaned_data[-train_index, ]
+```
+
+# Preparación de Datos
+
+## Aplicar SMOTE
+
+```{r}
+
+
+# Aplicar SMOTE al conjunto de entrenamiento
+train_data_balanced <- ovun.sample(is_successful ~ ., data = train_data, method = "both", 
+                                    p = 0.5, seed = 1)$data
+
+
+```
+
+```{r}
+#| include: false
+#| echo: true
+#| message: false
+#| warning: false
+#| error: false
+# Verificar el balanceo de clases
+table(train_data_balanced$is_successful)
+```
+
+# Entrenamiento y Evaluación del Modelo
+
+## Entrenar el modelo
+
+```{r}
+
+# Entrenar un modelo de regresión logística
+model <- glm(is_successful ~ yardsToGo + offenseFormation + preSnapHomeTeamWinProbability,
+             data = train_data_balanced, family = binomial)
+
+
+```
+
+------------------------------------------------------------------------
+
+```{r}
+#| include: false
+
+# Resumen del modelo
+summary(model)
+```
+
+```{r}
+#| include: false
+#| echo: true
+# Realizar predicciones en el conjunto de prueba
+test_data$predicted_prob <- predict(model, test_data, type = "response")
+test_data$predicted <- ifelse(test_data$predicted_prob > 0.5, 1, 0)
+
+
+```
+
+```{r}
+#| include: false
+#| echo: true
+# Evaluar el modelo
+confusion_matrix <- confusionMatrix(as.factor(test_data$predicted), as.factor(test_data$is_successful))
+print(confusion_matrix)
+```
+
+```{r}
+#| include: false
+#| message: false
+#| warning: false
+#| error: false
+# Calcular AUC
+roc_obj <- roc(test_data$is_successful, test_data$predicted_prob)
+auc_value <- auc(roc_obj)
+print(paste("AUC:", auc_value))
+
+
+```
+
+ROC
+
+```{r}
+#| include: true
+#| echo: false
+# Graficar la curva ROC
+plot(roc_obj, main = "Curva ROC")
+```
+
+Métricas de Evaluación del Modelo
+
+Evaluaremos el rendimiento del modelo a través de una matriz de confusión, F1-Score, precisión y sensibilidad. También calcularemos el AUC para analizar el desempeño general del modelo.
+
+```{r}
+#| include: false
+
+# Calcular la matriz de confusión
+conf_matrix <- confusionMatrix(as.factor(test_data$predicted), as.factor(test_data$is_successful))
+print("Matriz de Confusión:")
+print(conf_matrix$table)
+
+
+```
+
+------------------------------------------------------------------------
+
+```{r}
+#| include: false
+
+# Extraer precisión, sensibilidad y F1-Score
+accuracy <- conf_matrix$overall['Accuracy']
+sensitivity <- conf_matrix$byClass['Sensitivity']
+precision <- conf_matrix$byClass['Pos Pred Value']
+f1_score <- 2 * ((precision * sensitivity) / (precision + sensitivity))
+
+# Mostrar resultados
+cat("Precisión:", round(accuracy, 2), "\n")
+cat("Sensibilidad (Recall):", round(sensitivity, 2), "\n")
+cat("Precisión (Precision):", round(precision, 2), "\n")
+cat("F1-Score:", round(f1_score, 2), "\n")
+
+```
+
+------------------------------------------------------------------------
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+
+# Calcular métricas
+accuracy <- conf_matrix$overall['Accuracy']
+sensitivity <- conf_matrix$byClass['Sensitivity']
+precision <- conf_matrix$byClass['Pos Pred Value']
+f1_score <- 2 * ((precision * sensitivity) / (precision + sensitivity))
+auc_value <- auc(roc_obj)
+
+
+```
+
+```{r}
+# Crear un data frame con las métricas
+df_results <- data.frame(
+  Metric = c("Accuracy", "Sensitivity", "Precision", "F1 Score", "AUC"),
+  Value = round(c(accuracy, sensitivity, precision, f1_score, auc_value), 2)
+)
+
+# Mostrar el data frame de resultados
+print(df_results)
+
+```
+
+# Conclusiones
+
+``` markdown
+
+El modelo de regresión logística presenta un rendimiento limitado, con una precisión de 51% y un AUC de 0.57, apenas por encima del azar. La sensibilidad es moderada (68%), pero la baja precisión (36%) indica muchos falsos positivos. Estos resultados sugieren que el modelo actual no es adecuado para predicciones confiables, y sería conveniente optimizar variables o explorar otros modelos para mejorar su desempeño.
+```
+
+\*\*

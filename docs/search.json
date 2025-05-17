@@ -2,15 +2,29 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "mi_web.git",
+    "title": "Hola, I’m Brandon!",
     "section": "",
-    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.\n\n1 + 1\n\n[1] 2"
+    "text": "I’m Brandon, passionate about deep learning models, machine learning, and mathematical modeling for business intelligence, analytics, and predictive insights. Get to know me better..\nExplora mis proyectos\nEcha un vistazo a algunos de los projects en los que he trabajado.\n          \nPhoto by Brandon"
   },
   {
     "objectID": "about.html",
     "href": "about.html",
-    "title": "About",
+    "title": "Brandon K. Martinez.",
     "section": "",
-    "text": "About this site\n\n1 + 1\n\n[1] 2"
+    "text": "soy cientifico de datos. Me gusta escribir en mi newsletter para compartir con otros las cosas nuevas que aprendo sobre tecnología, análisis de información, ciencia estadísticas  y cómo combinar todos estos temas.\nActualmente, estoy desarrollando un modelo predictivo como parte de mi tesis, lo que me ha permitido profundizar en algoritmos de aprendizaje automático y ajuste de hiperparámetros.\nDisfruto relacionarme con personas que comparten mi interés por la ciencia de datos. Además participo en comunidades y plataformas\n\nExperiencia\nAnalista de informacion y de Datos / Roles en estadística aplicada | Años recientes\n\n\nEducación\nLicenciatura en Ing.Estadística | Universidad en Panamá | Maestría Analitica de datos | Universidad Tecnológica de Panamá ( actualmente)\nCertificaciones y cursos complementarios en plataformas como Coursera, enfocados en analítica, visualización de datos y ciencia de datos.\n\n\nReflexion\nA veces no tienes apoyo ni contactos, y dan ganas de rendirse, pero el esfuerzo constante eventualmente dará resultados , la esperanza es lo ultimo que se pierde."
+  },
+  {
+    "objectID": "index.html#photo-by-brandon",
+    "href": "index.html#photo-by-brandon",
+    "title": "Hola, I’m Brandon!",
+    "section": "Photo by Brandon ",
+    "text": "Photo by Brandon"
+  },
+  {
+    "objectID": "projects.html",
+    "href": "projects.html",
+    "title": "Projects",
+    "section": "",
+    "text": "No matching items"
   }
 ]

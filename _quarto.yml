@@ -7,15 +7,30 @@ website:
   navbar:
     left:
       - href: index.qmd
-        text: Home
+        text: Inicio
       - href: about.qmd
-        text: About
+        text: Sobre mí
+      - href: projects.qmd
+        text: Proyectos
+      - icon: github
+        href: "https://github.com/Brandon780"
+        aria-label: GitHub
+      - icon: linkedin
+        href: "https://www.linkedin.com/in/brandonth/"
+        aria-label: LinkedIn
+  page-footer:
+    center:
+      - text: "Sitio creado por Brandon • 2025"
 
 format:
   html:
-    theme: cosmo
+    theme: flatly
+    css: css/styles.css
     toc: true
+    code-fold: true
+    code-summary: "Ver código"
 
+editor: visual
 
-
-
+execute:
+  freeze: auto

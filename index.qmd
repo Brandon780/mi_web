@@ -1,11 +1,35 @@
 ---
-title: "mi_web.git"
+title: "Hola, I'm Brandon!"
+description: "  <span class='subtitle'>La naturaleza tiene fenómenos, la ciencia de datos los traduce para entenderlos.</span>"
+format: html
+draft: false
+css: styles.css
 ---
 
-This is a Quarto website.
+<head>
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+<!-- Preload background image -->
 
-```{r}
-1 + 1
+<link rel="preload" href="/images/home-background.jpg" as="image"/> <link rel="stylesheet" type="text/css" href="css/styles.css">
+
+```{=html}
+  <style>
+body {
+      background-image: url('/images/home-background.jpg');
+      background-size: cover;
+    }
+  </style>
 ```
+
+</head>
+
+*I'm Brandon, passionate about deep learning models, machine learning, and mathematical modeling for business intelligence, analytics, and predictive insights*. [Get to know me better.](about.qmd "About Page")*.*
+
+
+Explora mis proyectos 
+
+Echa un vistazo a algunos de los [projects](projects.qmd "Projects Page") en los que he trabajado.
+
+<br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
+
+<a href="https://www.pexels.com/photo/aerial-shot-of-mountain-1731427/" target="_blank" class="small-link">Photo by Brandon</a>
