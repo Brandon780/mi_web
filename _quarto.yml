@@ -1,19 +1,21 @@
 project:
   type: website
+  output-dir: docs  # Carpeta donde se guardará el sitio renderizado (para GitHub Pages)
 
 website:
-  title: "mi_web.git"
+  title: "Mi sitio"
   navbar:
     left:
       - href: index.qmd
         text: Home
-      - about.qmd
+      - href: about.qmd
+        text: About
 
 format:
   html:
     theme: cosmo
-    css: styles.css
     toc: true
+
 
 
 
