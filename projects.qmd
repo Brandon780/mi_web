@@ -1,13 +1,31 @@
 ---
-title: "Projects"
-description: "Here are some works but I have others archived in my repositories."
-listing:
-  contents: posts
-  type: "default"
-  sort:
-    "publishDate desc"
-  categories: true
-  filter-ui: [category, title, date]
+title: "Projectos"
+description: "Aquí puedes ver algunos de mis trabajos, pero tengo más archivados en mis repositorios. No te robes las ideas 😄 (es broma). Si necesitas ayuda o buscas algo creativo, escríbeme con confianza"
+lang: es
 ---
 
 ------------------------------------------------------------------------
+
+*Aquí encontrarás archivos reproducibles y anécdotas sobre otros softwares de visualización y análisis de datos. Aún no subo todo lo de machine learning, pero planeo incluirlo pronto*
+
+# Visualization - POWER BI
+
+completé un entrenamiento intensivo de tres días en Power BI (año -2024), disponible a través de un canal de YouTube especializado. Aunque aún me consideraba en un nivel inicial, esta experiencia fue clave para fortalecer mis habilidades en visualización de datos y subir de nivel. Valoro especialmente la claridad metodológica del curso, el enfoque práctico y el énfasis en la ubicación estratégica de indicadores en los informes. Sin duda, fue una oportunidad de aprendizaje muy enriquecedora.
+
+[Dashboards de ventas](https://bit.ly/pbidia1 "Dashboards de ventas")
+
+[Dashboards de Recursos humanos](https://bit.ly/pbidia2)
+
+# **Fusionando R y Python**
+
+Exploro cómo combinar R, Python y Quarto para crear análisis interactivos y visualmente impactantes , y como el yml une estos dos sofware
+
+este es el proyecto [Quarto + R + Python](https://brandonmz.quarto.pub/r-y-quarto--magia-sorprendente/ "Rerproducible")
+
+si quieres mas detalles de esta experiencia aqui dejo el link [Quarto con R y Python](https://www.linkedin.com/pulse/fusionando-r-y-python-en-un-solo-proyecto-de-quarto-brandon-martinez-2d15e/?trackingId=NF0nHk8eRp%2BBj%2FYi8lqojw%3D%3D "NEWSLETTER")
+
+# Análisis de la Liga Nacional de Fútbol Americano
+
+Creando presentacion de quarto con este datset de superbowl y explorando fase de las acciones en territorio y características del juego. Se busca identificar relaciones entre variables mediante un ejercicio de análisis de datos exploratorio.
+
+[NFL](https://brandonmz.quarto.pub/_nfl_4/ "NFL Analytics")

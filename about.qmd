@@ -10,31 +10,26 @@ about:
     - icon: github
       text: GitHub
       href: https://github.com/Brandon780
-      
 ---
---------------------------------------------------------------------
 
+------------------------------------------------------------------------
 
-<strong>**soy cientifico de datos.**</strong> Me gusta escribir en mi newsletter para compartir con otros las cosas nuevas que aprendo sobre tecnología, análisis de información, ciencia estadísticas
-</strong>  y cómo combinar todos estos temas.
+<strong>**Me interesa la ciencia de datos y he estado formándome activamente en este campo.**</strong> Me gusta escribir en mi [newsletter](Suscribirte%20en%20LinkedIn%20https://www.linkedin.com/build-relation/newsletter-follow?entityUrn=7231501230294904832 "Suscribirte en LinkedIn") para compartir con otros las cosas nuevas que aprendo sobre tecnología, análisis de información, ciencia estadísticas </strong> y cómo combinar todos estos temas.
 
+Actualmente, desarrollaré un modelo predictivo como parte de mi tesis de maestría, lo que me ha permitido profundizar en algoritmos de aprendizaje automático complejos y en algunos conceptos de ajuste de hiperparámetros.
 
-Actualmente, estoy desarrollando un modelo predictivo como parte de mi tesis, lo que me ha permitido profundizar en algoritmos de aprendizaje automático y ajuste de hiperparámetros.
-
-
-Disfruto relacionarme con personas que comparten mi interés por la ciencia de datos. Además participo en comunidades y plataformas 
+Disfruto relacionarme con personas que comparten interés por la ciencia de datos. Además participo en comunidades y plataformas
 
 ### Experiencia
 
-
-Analista de informacion y de Datos / Roles en estadística aplicada | Años recientes
-
+Analista de información \| Años recientes
 
 ### Educación
 
-<strong>Licenciatura en Ing.Estadística</strong> | Universidad en Panamá | Maestría Analitica de datos | Universidad Tecnológica de Panamá ( actualmente)
+Licenciatura en Ing. Estadístitca \| Universidad de Panamá \|
 
-Certificaciones y cursos complementarios en plataformas como Coursera, enfocados en analítica, visualización de datos y ciencia de datos.
+<strong> Maestría Analitica de datos</strong> \| Universidad Tecnológica de Panamá ( actualmente)
 
 ### Reflexion
-A veces no tienes apoyo ni contactos, y dan ganas de rendirse, pero el esfuerzo constante eventualmente dará resultados , la esperanza es lo ultimo que se pierde.
+
+***Si no tienes apoyo, simplemente hazlo. No pierdas la esperanza.***
